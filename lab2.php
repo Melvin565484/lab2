@@ -27,15 +27,23 @@
 
     class Taxi extends Vehiculo{
         public $numlicencia;
-
+        
         function __construct($matricula, $modelo, $potenciacv,$numlicencia){
             parent::__construct($matricula, $modelo, $potenciacv);
             $this->numlicencia=$numlicencia;
         }
+        
+        public function setNumeroLicencia($numlicencia1){
+            if (is_numeric($numlicencia1)){
+                $this->numlicencia = $numlicencia1;
+            } else {
+                throw new Exception("Numero de licencia no válido");
+            }
+        }
+
         public function getNumeroLicencia(){
             return $this->numlicencia;
         }
-
         
     }
 
@@ -46,6 +54,14 @@
         function __construct($matricula, $modelo, $potenciacv,$numeroplaza){
             parent::__construct($matricula, $modelo, $potenciacv);
             $this->numeroplaza=$numeroplaza;
+        }
+
+        public function setNumeroPlazas($plaza){
+            if (is_numeric($plaza)){
+                $this->numeroplaza = $plaza;
+            } else {
+                throw new Exception("Por favor ingrese un numero ");
+            }
         }
 
         public function getNumeroPlazas(){
@@ -61,7 +77,8 @@ $vehiculo = new Vehiculo ("P124598", "Porche", 911);
             "Potencia CV: ".$vehiculo->getPotenciaCV()."<br/>";
 
 
-$taxi = new Taxi("P7852369","Porsche Carrera 4GTS","480", 78945616150);
+$taxi = new Taxi("P7852369","Porsche Carrera 4GTS","480", 7891512);
+            $taxi->setNumeroLicencia(78527258);
             echo
             "<h3>Taxi</h3>".
             "Matricula: ".$taxi->getMatricula()."<br/>".
@@ -71,6 +88,7 @@ $taxi = new Taxi("P7852369","Porsche Carrera 4GTS","480", 78945616150);
 
 
 $autobus = new Autobus("P66652369","BMW M3","510", 7);
+            $autobus->setNumeroPlazas(8);
             echo
             "<h3>Autobus</h3>".
             "Matricula: ".$autobus->getMatricula()."<br/>".
